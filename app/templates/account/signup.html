@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Sign Up</title>
+{% endblock %}
+
+{% block headerTitle %}
+Sign Up
+{% endblock %}
+
+{% block body %}
+	{% if error %}
+	<div class="notification is-danger">
+		<p>{{ error }}</p>
+	</div>
+	{% endif %}
+	<form action="/signup" method="POST" class="box m-3" name="signup_form" id="signup_form">
+		<div class="field">
+			<label for="username" class="label">Username<span class="has-text-danger">*</span></label>
+			<input type="text" name="username" id="username" class="input" autocomplete="username" value="{{ username if username else '' }}" required>
+		</div>
+		<div class="field">
+			<label for="password" class="label">Password<span class="has-text-danger">*</span></label>
+			<input type="password" name="password" id="password" class="input" autocomplete="new-password" required>
+		</div>
+		<div class="field">
+			<button type="submit" class="button is-primary">Sign Up</button>
+		</div>
+	</form>
+{% endblock %}

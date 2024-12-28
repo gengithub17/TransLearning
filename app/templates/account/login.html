@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Login</title>
+{% endblock %}
+
+{% block headerTitle %}
+Login
+{% endblock %}
+
+{% block body %}
+	{% if error %}
+	<div class="notification is-danger">
+		<p>{{ error }}</p>
+	</div>
+	{% endif %}
+	<form action="/login" method="POST" class="box m-3" name="login_form" id="login_form">
+		<div class="field">
+			<label for="username" class="label">Username<span class="has-text-danger">*</span></label>
+			<input type="text" name="username" id="username" class="input" autocomplete="username" required value="{{ username if username else '' }}">
+		</div>
+		<div class="field">
+			<label for="password" class="label">Password<span class="has-text-danger">*</span></label>
+			<input type="password" name="password" id="password" class="input" autocomplete="current-password" required>
+		</div>
+		<div class="field">
+			<button type="submit" class="button is-primary">Login</button>
+		</div>
+	</form>
+{% endblock %}

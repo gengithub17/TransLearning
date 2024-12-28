@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>TransLearning</title>
+{% endblock %}
+
+{% block headerTitle %}
+{{ news_title }}
+{% endblock %}
+
+{% block body %}
+<form action="/{{ news_id }}/translearn" method="POST">
+	<table>
+		<thead>
+			<tr>
+				<th>Japanese Content</th>
+				<th>English Content</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for sentence in sentences %}
+			<tr>
+				<td>{{ sentence.jp_sentece }}</td>
+				<td>
+					<textarea name="eng_sentence_{{ sentence.sentence_id }}" class="textarea">{{ sentence.eng_sentence }}</textarea>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div class="field">
+		<button type="submit" class="button is-primary">Save</button>
+		<a href="/" class="button is-light">Cancel</a>
+	</div>
+</form>
+{% endblock %}

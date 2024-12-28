@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>New Page</title>
+{% endblock %}
+
+{% block headerTitle %}
+New Page
+{% endblock %}
+
+{% block body %}
+{% if errors %}
+	<div class="notification is-danger">
+		{% for error in errors %}
+			<p>{{ error }}</p>
+		{% endfor %}
+	</div>
+{% endif %}
+<form action="/new" method="POST" class="box m-3" name="new_form" id="new_form">
+	<div class="field">
+		<div class="columns is-align-items-center">
+			<div class="column">
+				<label for="jp_title" class="label">Japanese Title<span class="has-text-danger">*</span></label>
+			</div>
+			<div class="column">
+				<label for="eng_title" class="label">English Title<span class="has-text-danger">*</span></label>
+			</div>
+		</div>
+		<div class="columns">
+			<div class="column">
+				<input type="text" name="jp_title" id="jp_title" class="input" value="{{ jp_title if jp_title else '' }}" required>
+			</div>
+			<div class="column">
+				<input type="text" name="eng_title" id="eng_title" class="input" value="{{ eng_title if eng_title else '' }}" required>
+			</div>
+		</div>
+	</div>
+	<div class="field">
+		<div class="columns is-align-items-center">
+			<!-- ラベル列 -->
+			<div class="column">
+				<label for="eng_url" class="label">Japanese URL<span class="has-text-danger">*</span></label>
+			</div>
+			<div class="column">
+				<label for="jp_url" class="label">English URL</label>
+			</div>
+		</div>
+		<div class="columns">
+			<!-- 入力フィールド列 -->
+			<div class="column">
+				<input type="url" name="jp_url" id="jp_url" class="input" value="{{ jp_url if jp_url else '' }}" required>
+			</div>
+			<div class="column">
+				<input type="url" name="eng_url" id="eng_url" class="input" value="{{ eng_url if eng_url else '' }}">
+			</div>
+		</div>
+	</div>
+	<div class="field">
+		<label for="start_date" class="label">Start Date<span class="has-text-danger">*</span></label>
+		<input type="date" name="start_date" id="start_date" class="input" value="{{ start_date_str if start_date_str else '' }}" required>
+		<label class="checkbox">
+			<input type="checkbox" name="private" id="private">
+			Private
+		</label>
+	</div>
+	<div class="field">
+		<button type="submit" class="button is-primary">Next<button>
+		<button type="button" class="button is-light" onclick="window.location.href='/'">Cancel</button>
+	</div>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+	// ページ読み込み時に現在の日付を設定
+	document.addEventListener("DOMContentLoaded", function () {
+		const dateInput = document.getElementById("start_date");
+		const today = new Date().toISOString().split("T")[0];
+		dateInput.value = today;
+	});
+</script>
+{% endblock %}

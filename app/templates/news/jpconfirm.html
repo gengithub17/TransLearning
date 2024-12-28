@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Confirm</title>
+{% endblock %}
+
+{% block style %}
+<style>
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 20px 0;
+	}
+	th, td {
+		border: 1px solid #ddd;
+		padding: 8px;
+		text-align: left;
+	}
+	th {
+		background-color: #f2f2f2;
+	}
+	tr:nth-child(even) {
+		background-color: #f9f9f9;
+	}
+	tr:nth-child(odd) {
+		background-color: #ffffff;
+	}
+	tr:hover {
+		background-color: #f1f1f1;
+	}
+</style>
+{% endblock %}
+
+{% block headerTitle %}
+{{ news_title }}
+{% endblock %}
+
+{% block body %}
+<table>
+	<thead>
+		<tr>
+			<th>Japanese Content</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for jp in sentences %}
+		<tr>
+			<td>{{ jp }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div class="field is-grouped">
+	<form action="/{{ news_id }}/jparticle/confirm" method="POST" class="control">
+		<button type="submit" class="button is-primary">OK</button>
+	</form>
+	<form action="/{{ news_id }}/jparticle" method="GET" class="control">
+		<button type="submit" class="button is-light">Back</button>
+	</form>
+	<form action="/{{ news_id }}/jparticle/cancel" method="POST" class="control">
+		<button type="submit" class="button is-danger">Cancel</button>
+	</form>
+</div>
+{% endblock %}

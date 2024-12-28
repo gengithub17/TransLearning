@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Japanese</title>
+{% endblock %}
+
+{% block headerTitle %}
+{{ news_title }}
+{% endblock %}
+{% block body %}
+{% if errors %}
+<div class="notification is-danger">
+	{% for error in errors %}
+		<p>{{ error }}</p>
+	{% endfor %}
+</div>
+{% endif %}
+<form action="/{{ news_id }}/jparticle" method="POST" class="box m-3" name="jparticle_form" id="jparticle_form">
+	<div class="field">
+		<label for="jparticle" class="label">Register japanese article<span class="has-text-danger">*</span></label>
+		<textarea name="jparticle" id="jparticle" class="textarea" required>{{ jparticle }}</textarea>
+	</div>
+	<div class="field">
+		<button type="submit" class="button is-primary">Next</button>
+		<label class="checkbox">
+			<input type="checkbox" name="eng_sametime" id="eng_sametime" {% if eng_sametime %}checked{% endif %}>
+			Register English article now
+		</label>
+	</div>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+	const textarea = document.getElementById('jparticle');
+	function autoResize() {
+		textarea.style.height = 'auto';
+		textarea.style.height = textarea.scrollHeight + 'px';
+	}
+	textarea.addEventListener('input', autoResize);
+	window.addEventListener('load', autoResize);
+</script>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.2/css/bulma.min.css" crossorigin="anonymous" refferrerpolicy="no-referrer">
+	{% block head %}{% endblock %}
+	{% block style %}{% endblock %}
+</head>
+<body>
+	<nav class="navbar is-link", role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="navbar-item" href="/">
+				<h1 class="title is-4">TransLearning</h1>
+			</a>
+		</div>
+		<div class="navbar-menu">
+			<div class="navbar-start">
+				<a class="navbar-item" href="/new">New</a>
+			</div>
+		</div>
+		{% if user %}
+		<div class="navbar-end">
+			<div class="navbar-item">
+				<span class="mr-2">{{ user.name }}</span>
+			</div>
+			<div class="navbar-item">
+				<a class="button is-light" href="/{{ user.user_id }}">Account Settings</a>
+			</div>
+			<div class="navbar-item">
+				<a class="button is-light" href="/logout">Logout</a>
+			</div>
+		</div>
+		{% endif %}
+	</nav>
+	<div class="box m-3">
+		<h1 class="title ml-3 mt-3">
+			{% block headerTitle %}{% endblock %}
+		</h1>
+		{% block body %}{% endblock %}
+	</div>
+	{% block script %}{% endblock %}
+</body>
+</html>

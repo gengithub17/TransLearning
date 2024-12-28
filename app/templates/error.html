@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<title>Error{{error.code}}</title>
+{% endblock %}
+
+{% block headerTitle %}
+Error{{error.code}}
+{% endblock %}
+
+{% block body %}
+<div class="box m-3">
+	<h1 class="is-size-3">Error : {{error.code}}</h1>
+	<p class="is-size-5">{{error.description}}</p>
+</div>
+{% endblock %}

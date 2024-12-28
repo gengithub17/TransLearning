@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>TransLearning</title>
+{% endblock %}
+
+{% block headerTitle %}
+Welcome to TransLearning!
+{% endblock %}
+
+{% block body %}
+<table class="table is-fullwidth">
+	<thead>
+		<tr>
+			<th>Japanese Title</th>
+			<th>English Title</th>
+			<th>Created</th>
+			<th>Status</th>
+			<th>Last Update</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for news in news_list %}
+		<tr>
+			<td>{{ news.jp_title }}</td>
+			<td>{{ news.eng_title }}</td>
+			<td>{{ news.start_date }}</td>
+			<td>{{ news.print_status() }}</td>
+			<td>{{ news.last_updated }}</td>
+			<td>
+				<a href="/{{ news.news_id }}/translate" class="button is-primary">Translate</a>
+				<a href="/{{ news.news_id }}/edit" class="button is-info">Edit</a>
+				<a href="/{{ news.news_id }}/delete" class="button is-danger">Delete</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+</table>
+{% endblock %}
